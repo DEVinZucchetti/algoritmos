@@ -1,8 +1,16 @@
-var salarioFuncionario = Number(prompt("Qual o salário do funcionário ?"))
 
-var impostoRenda = 0
+/*
+var salarioLiquido = salarioFuncionario - impostoRenda - inss
+alert(salarioLiquido)
 
-if(salarioFuncionario <= 1903.98) {
+var salarioFormatado = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(salarioLiquido)
+alert(salarioFormatado)
+*/
+
+function calcularImpostoRenda(salarioFuncionario){
+  var impostoRenda = 0
+  
+ if(salarioFuncionario <= 1903.98) {
   impostoRenda = 0
 } else if(salarioFuncionario >= 1903.99 && salarioFuncionario <= 2826.65 ) {
   impostoRenda = (salarioFuncionario * 0.075 ) - 142.80
@@ -13,8 +21,11 @@ if(salarioFuncionario <= 1903.98) {
 } else {
   impostoRenda = (salarioFuncionario * 0.275) - 869.36
 }
+  return impostoRenda
+}
 
-var inss = 0
+function calcularInss(salarioFuncionario){
+ var inss = 0
 
  if (salarioFuncionario <= 1302) {
         inss = salarioFuncionario * 0.075 // 7.5%
@@ -25,11 +36,24 @@ var inss = 0
     } else {
         inss = salarioFuncionario * 0.14 //14%
     }
+  
+  return inss
+}
 
-var salarioLiquido = salarioFuncionario - impostoRenda - inss
+function calcularSalarioLiquido(salarioFuncionario, impostoRenda, inss){
+   var resultadoSalarioLiquido = salarioFuncionario - impostoRenda - inss
+   return resultadoSalarioLiquido
+}
 
-var salarioFormatado = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(salarioLiquido)
+ var salarioFuncionario = Number(prompt("Qual o salário do funcionário ?"))
+ 
+ var inss = calcularInss(salarioFuncionario)
+ var impostoRenda = calcularImpostoRenda(salarioFuncionario) 
+ var salarioLiquido = calcularSalarioLiquido(salarioFuncionario,impostoRenda, inss)
+ 
 
-alert(salarioFormatado)
+ 
 
+ 
+ 
 
